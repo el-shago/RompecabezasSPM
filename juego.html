@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      var contadorgotas = 0;
+      function inicializarEventos() {
+        //var elementArrastrado = document.getElementById("idButtonArrastrado");
+        var listaGotaspieza = document.querySelectorAll(".pieza");
+        for (let index = 0; index < listaGotaspieza.length; index++) {
+          const element = listaGotaspieza[index];
+          element.ondrag = onDrag;
+          element.ondragstart = onDragStart;
+          element.ondragend = onDragEnd;
+        }
+
+        //var elementocuadro = document.getElementById("idcuadro");
+        var listacuadros = document.querySelectorAll(".cuadro");
+        listacuadros.forEach(function (elemet) {
+          elemet.ondragenter = onDragEnter;
+          elemet.ondragover = onDragOver;
+          elemet.ondragleave = onDragLeave;
+          elemet.ondrop = onDrop;
+        });
+
+      }
+      function onDrag() {
+        console.log("ondrag...");
+      }
+
+      function onDragStart() {
+        console.log("ondragstart...");
+        this.classList.add("btn-danger");
+        //event.dataTransfer.setData("idGotapieza",event.target.id);
+        event.dataTransfer.setData("idGotapieza", this.id);
+      }
+      function onDragEnd() {
+        console.log("ondragend...");
+        this.classList.remove("btn-danger");
+      }
+      function onDragEnter() {
+        console.log("ondraenter...");
+      }
+      function onDragOver() {
+        console.log("ondragover...");
+        event.preventDefault();
+      }
+      function onDragLeave() {
+        console.log("ondragleave...");
+      }
+      function onDrop() {
+        console.log("ondrop.........................................");
+        const idGotapiezaArrastrado = event.dataTransfer.getData("idGotapieza");
+        var hijo = document.getElementById(idGotapiezaArrastrado);
+        //this.appendChild(hijo);
+        event.target.appendChild(hijo);
+      }
+
+      window.addEventListener("load", function () {
+        var contenedor = document.getElementById("contenedorPiezas");
+        var botones = contenedor.querySelectorAll('input[type="button"]');
+
+        // Convierte la lista de botones en un array para facilitar la manipulación
+        var botonesArray = Array.from(botones);
+
+        // Función para reordenar aleatoriamente los botones
+        function shuffleArray(array) {
+          for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // Intercambiar elementos
+          }
+        }
+
+        shuffleArray(botonesArray);
+
+        // Vuelve a agregar los botones en el nuevo orden
+        botonesArray.forEach(function (boton) {
+          contenedor.appendChild(boton);
+        });
+      });
+
+      function checador(){
+        alert("siolaquetal");
+      }
+    </script>
+  </head>
+
+  <body onload="inicializarEventos();">
+    <div class="container">
+      <div class="row">
+        <div
+          id="idcuadro1"
+          class="cuadro py-3 col-2 border border-success border-5"
+        ></div>
+        <div
+          id="idcuadro2"
+          class="cuadro py-3 col-2 border border-success border-5"
+        ></div>
+        <div
+          id="idcuadro3"
+          class="cuadro py-3 col-2 border border-success border-5"
+        ></div>
+      </div>
+      <div class="row">
+        <div
+          id="idcuadro4"
+          class="cuadro py-3 col-2 border border-success border-5"
+        ></div>
+        <div
+          id="idcuadro5"
+          class="cuadro py-3 col-2 border border-success border-5"
+        ></div>
+        <div
+          id="idcuadro6"
+          class="cuadro py-3 col-2 border border-success border-5"
+        ></div>
+      </div>
+      <div class="row">
+        <div
+          id="idcuadro7"
+          class="cuadro py-3 col-2 border border-success border-5"
+        ></div>
+        <div
+          id="idcuadro8"
+          class="cuadro py-3 col-2 border border-success border-5"
+        ></div>
+        <div
+          id="idcuadro9"
+          class="cuadro py-3 col-2 border border-success border-5"
+        ></div>
+      </div>
+      <div class="col"></div>
+      <div id="contenedorPiezas" class="col-2">
+        <input
+          id="idPieza1"
+          type="button"
+          class="pieza btn btn-warning"
+          draggable="true"
+        />
+        <input
+          id="idPieza2"
+          type="button"
+          class="pieza btn btn-primary"
+          draggable="true"
+        />
+        <input
+          id="idPieza3"
+          type="button"
+          class="pieza btn btn-primary"
+          draggable="true"
+        />
+        <input
+          id="idPieza4"
+          type="button"
+          class="pieza btn btn-primary"
+          draggable="true"
+        />
+        <input
+          id="idPieza5"
+          type="button"
+          class="pieza btn btn-primary"
+          draggable="true"
+        />
+        <input
+          id="idPieza6"
+          type="button"
+          class="pieza btn btn-primary"
+          draggable="true"
+        />
+        <input
+          id="idPieza7"
+          type="button"
+          class="pieza btn btn-primary"
+          draggable="true"
+        />
+        <input
+          id="idPieza8"
+          type="button"
+          class="pieza btn btn-primary"
+          draggable="true"
+        />
+        <input
+          id="idPieza9"
+          type="button"
+          class="pieza btn btn-primary"
+          draggable="true"
+        />
+      </div>
+      <div class="container">
+        <button onclick="checador()" class="m-5 border-2">Terminé</button>
+    </div>
+    </div>
+    
+  </body>
+</html>
