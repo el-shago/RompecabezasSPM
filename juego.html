@@ -77,7 +77,7 @@
 
       window.addEventListener("load", function () {
         var contenedor = document.getElementById("contenedorPiezas");
-        var botones = contenedor.querySelectorAll('input[type="button"]');
+        var botones = contenedor.querySelectorAll('img[type="button"]');
 
         // Convierte la lista de botones en un array para facilitar la manipulación
         var botonesArray = Array.from(botones);
@@ -98,9 +98,14 @@
         });
       });
 
-      function checador(){
-        alert("siolaquetal");
+      function checarPosiciones() {
+          const cuadros = document.querySelectorAll(".cuadro");
+          const piezas = document.querySelectorAll(".pieza");
+
+          let todasEnPosicionCorrecta = true;
+
       }
+      
     </script>
   </head>
 
@@ -149,64 +154,73 @@
         ></div>
       </div>
       <div class="col"></div>
-      <div id="contenedorPiezas" class="col-2">
-        <input
+      <div id="contenedorPiezas" class="flex-wrap">
+        <img
           id="idPieza1"
           type="button"
-          class="pieza btn btn-warning"
+          class="pieza img-fluid"
           draggable="true"
-        />
-        <input
+          src="./img/1.jpg"
+        >
+        <img
           id="idPieza2"
           type="button"
-          class="pieza btn btn-primary"
+          class="pieza img-fluid"
           draggable="true"
+          src="./img/2.jpg"
         />
-        <input
+        <img
           id="idPieza3"
           type="button"
-          class="pieza btn btn-primary"
+          class="pieza img-fluid"
           draggable="true"
+          src="./img/3.jpg"
         />
-        <input
+        <img
           id="idPieza4"
           type="button"
-          class="pieza btn btn-primary"
+          class="pieza img-fluid"
           draggable="true"
+          src="./img/4.jpg"
         />
-        <input
+        <img
           id="idPieza5"
           type="button"
-          class="pieza btn btn-primary"
+          class="pieza img-fluid"
           draggable="true"
+          src="./img/5.jpg"
         />
-        <input
+        <img
           id="idPieza6"
           type="button"
-          class="pieza btn btn-primary"
+          class="pieza img-fluid"
           draggable="true"
+          src="./img/6.jpg"
         />
-        <input
+        <img
           id="idPieza7"
           type="button"
-          class="pieza btn btn-primary"
+          class="pieza img-fluid"
           draggable="true"
+          src="./img/7.jpg"
         />
-        <input
+        <img
           id="idPieza8"
           type="button"
-          class="pieza btn btn-primary"
+          class="pieza img-fluid"
           draggable="true"
+          src="./img/8.jpg"
         />
-        <input
+        <img
           id="idPieza9"
           type="button"
-          class="pieza btn btn-primary"
+          class="pieza img-fluid"
           draggable="true"
+          src="./img/9.jpg"
         />
       </div>
       <div class="container">
-        <button onclick="checador()" class="m-5 border-2">Terminé</button>
+        <button onclick="checarPosiciones()" class="m-3 btn btn-outline-success border-1">Terminé</button>
     </div>
     </div>
     
