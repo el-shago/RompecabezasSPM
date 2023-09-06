@@ -50,7 +50,7 @@
       function onDragStart() {
         console.log("ondragstart...");
         this.classList.add("btn-danger");
-        //event.dataTransfer.setData("idGotapieza",event.target.id);
+
         event.dataTransfer.setData("idGotapieza", this.id);
       }
       function onDragEnd() {
@@ -78,34 +78,47 @@
       window.addEventListener("load", function () {
         var contenedor = document.getElementById("contenedorPiezas");
         var botones = contenedor.querySelectorAll('img[type="button"]');
-
-        // Convierte la lista de botones en un array para facilitar la manipulación
         var botonesArray = Array.from(botones);
-
-        // Función para reordenar aleatoriamente los botones
         function shuffleArray(array) {
           for (var i = array.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]]; // Intercambiar elementos
+            [array[i], array[j]] = [array[j], array[i]];
           }
         }
 
         shuffleArray(botonesArray);
-
-        // Vuelve a agregar los botones en el nuevo orden
         botonesArray.forEach(function (boton) {
           contenedor.appendChild(boton);
         });
       });
 
       function checarPosiciones() {
-          const cuadros = document.querySelectorAll(".cuadro");
-          const piezas = document.querySelectorAll(".pieza");
+        const cuadros = document.querySelectorAll(".cuadro");
+        const piezas = document.querySelectorAll(".pieza");
 
-          let todasEnPosicionCorrecta = true;
+        let todasEnPosicionCorrecta = true;
 
+        piezas.forEach(function (pieza) {
+          const cuadroDestino = document.getElementById(
+            pieza.getAttribute("data-cuadro")
+          );
+
+          if (cuadroDestino && cuadroDestino.contains(pieza)) {
+            pieza.classList.add("correcto");
+          } else {
+            pieza.classList.remove("correcto");
+            todasEnPosicionCorrecta = false;
+          }
+        });
+
+        if (todasEnPosicionCorrecta) {
+          alert("Que grande te la rifaste");
+        } else {
+          alert(
+            "Algo anda mal..."
+          );
+        }
       }
-      
     </script>
   </head>
 
@@ -114,43 +127,43 @@
       <div class="row">
         <div
           id="idcuadro1"
-          class="cuadro py-3 col-2 border border-success border-5"
+          class="cuadro py-3 col-2 border border-info border-5"
         ></div>
         <div
           id="idcuadro2"
-          class="cuadro py-3 col-2 border border-success border-5"
+          class="cuadro py-3 col-2 border border-info border-5"
         ></div>
         <div
           id="idcuadro3"
-          class="cuadro py-3 col-2 border border-success border-5"
+          class="cuadro py-3 col-2 border border-info border-5"
         ></div>
       </div>
       <div class="row">
         <div
           id="idcuadro4"
-          class="cuadro py-3 col-2 border border-success border-5"
+          class="cuadro py-3 col-2 border border-info border-5"
         ></div>
         <div
           id="idcuadro5"
-          class="cuadro py-3 col-2 border border-success border-5"
+          class="cuadro py-3 col-2 border border-info border-5"
         ></div>
         <div
           id="idcuadro6"
-          class="cuadro py-3 col-2 border border-success border-5"
+          class="cuadro py-3 col-2 border border-info border-5"
         ></div>
       </div>
       <div class="row">
         <div
           id="idcuadro7"
-          class="cuadro py-3 col-2 border border-success border-5"
+          class="cuadro py-3 col-2 border border-info border-5"
         ></div>
         <div
           id="idcuadro8"
-          class="cuadro py-3 col-2 border border-success border-5"
+          class="cuadro py-3 col-2 border border-info border-5"
         ></div>
         <div
           id="idcuadro9"
-          class="cuadro py-3 col-2 border border-success border-5"
+          class="cuadro py-3 col-2 border border-info border-5"
         ></div>
       </div>
       <div class="col"></div>
@@ -161,13 +174,15 @@
           class="pieza img-fluid"
           draggable="true"
           src="./img/1.jpg"
-        >
+          data-cuadro="idcuadro1"
+        />
         <img
           id="idPieza2"
           type="button"
           class="pieza img-fluid"
           draggable="true"
           src="./img/2.jpg"
+          data-cuadro="idcuadro2"
         />
         <img
           id="idPieza3"
@@ -175,6 +190,7 @@
           class="pieza img-fluid"
           draggable="true"
           src="./img/3.jpg"
+          data-cuadro="idcuadro3"
         />
         <img
           id="idPieza4"
@@ -182,6 +198,7 @@
           class="pieza img-fluid"
           draggable="true"
           src="./img/4.jpg"
+          data-cuadro="idcuadro4"
         />
         <img
           id="idPieza5"
@@ -189,6 +206,7 @@
           class="pieza img-fluid"
           draggable="true"
           src="./img/5.jpg"
+          data-cuadro="idcuadro5"
         />
         <img
           id="idPieza6"
@@ -196,6 +214,7 @@
           class="pieza img-fluid"
           draggable="true"
           src="./img/6.jpg"
+          data-cuadro="idcuadro6"
         />
         <img
           id="idPieza7"
@@ -203,6 +222,7 @@
           class="pieza img-fluid"
           draggable="true"
           src="./img/7.jpg"
+          data-cuadro="idcuadro7"
         />
         <img
           id="idPieza8"
@@ -210,6 +230,7 @@
           class="pieza img-fluid"
           draggable="true"
           src="./img/8.jpg"
+          data-cuadro="idcuadro8"
         />
         <img
           id="idPieza9"
@@ -217,12 +238,17 @@
           class="pieza img-fluid"
           draggable="true"
           src="./img/9.jpg"
+          data-cuadro="idcuadro9"
         />
       </div>
       <div class="container">
-        <button onclick="checarPosiciones()" class="m-3 btn btn-outline-success border-1">Terminé</button>
+        <button
+          onclick="checarPosiciones()"
+          class="m-3 btn btn-outline-success border-1"
+        >
+          Terminé
+        </button>
+      </div>
     </div>
-    </div>
-    
   </body>
 </html>
